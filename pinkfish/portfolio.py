@@ -225,8 +225,10 @@ class Portfolio:
                                            force_stock_market_calendar=force_stock_market_calendar,
                                            check_fields=check_fields)
                 self._add_symbol_columns(ts, symbol, ts, fields)
-                ts.drop(columns=['open', 'high', 'low', 'close', 'volume', 'adj_close'],
-                        inplace=True)
+                drop_columns = ['open', 'high', 'low', 'close', 'volume']
+                if 'adj_close' in ts.columns:
+                    drop_columns.append('adj_close')
+                ts.drop(columns=drop_columns, inplace=True)
             else:
                 # Add another symbol.
                 _ts = pf.fetch_timeseries(symbol, dir_name=dir_name, use_cache=use_cache, data_source=data_source)
