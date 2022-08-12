@@ -72,7 +72,7 @@ def _adj_column_names(ts):
     return ts
 
 
-def fetch_timeseries(symbol, data_source, dir_name='data', use_cache=True, from_year=None):
+def fetch_timeseries(symbol, dir_name='data', use_cache=True, from_year=None, data_source='yahoo'):
     """
     Read time series data.
 
