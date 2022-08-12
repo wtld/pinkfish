@@ -127,59 +127,6 @@ def fetch_timeseries(symbol, dir_name='data', use_cache=True, from_year=None, da
     return ts
 
 
-# def fetch_timeseries(symbol, dir_name='data', use_cache=True, from_year=None):
-#     """
-#     Read time series data.
-
-#     Use cached version if it exists and use_cache is True, otherwise
-#     retrive, cache, then read.
-
-#     Parameters
-#     ----------
-#     symbol : str
-#         The symbol for a security.
-#     dir_name : str, optional
-#         The leaf data dir name (default is 'data').
-#     use_cache: bool, optional
-#         True to use data cache.  False to retrieve from the internet 
-#         (default is True).
-#     from_year: int, optional
-#         The start year for timeseries retrieval (default is None,
-#         which implies that all the available data is retrieved).
-
-#     Returns
-#     -------
-#     pd.DataFrame
-#         The timeseries of a symbol.
-#     """
-#     if from_year is None:
-#         from_year = 1900 if not sys.platform.startswith('win') else 1971
-
-#     # Yahoo finance uses '-' where '.' is used in symbol names.
-#     symbol = symbol.replace('.', '-')
-#     symbol = symbol.upper()
-
-#     # pinkfish allows the use of a suffix starting with a '_',
-#     # like SPY_SHRT, so extract the symbol.
-#     symbol = symbol.split('_')[0]
-
-#     timeseries_cache = os.path.join(_get_cache_dir(dir_name), symbol + '.csv')
-
-#     if os.path.isfile(timeseries_cache) and use_cache:
-#         pass
-#     else:
-#         ts = pdr.get_data_yahoo(symbol, start=datetime.datetime(from_year, 1, 1))
-#         #ts = pdr.DataReader(symbol, 'yahoo', start=datetime.datetime(from_year, 1, 1))
-#         ts.to_csv(timeseries_cache, encoding='utf-8')
-
-#     ts = pd.read_csv(timeseries_cache, index_col='Date', parse_dates=True)
-#     ts = _adj_column_names(ts)
-
-#     # Remove rows that have duplicated index.
-#     ts = ts[~ts.index.duplicated(keep='first')]
-#     return ts
-
-
 def _adj_prices(ts):
     """
     Back adjust prices relative to adj_close for dividends and splits.
