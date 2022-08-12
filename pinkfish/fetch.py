@@ -110,7 +110,7 @@ def fetch_timeseries(symbol, data_source, dir_name='data', use_cache=True, from_
     # like SPY_SHRT, so extract the symbol.
     symbol = symbol.split('_')[0]
 
-    timeseries_cache = os.path.join(_get_cache_dir(dir_name), f'{symbol}.{source}.csv')
+    timeseries_cache = os.path.join(_get_cache_dir(dir_name), f'{symbol}.{data_source}.csv')
 
     if os.path.isfile(timeseries_cache) and use_cache:
         pass
