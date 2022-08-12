@@ -116,7 +116,7 @@ def fetch_timeseries(symbol, data_source, dir_name='data', use_cache=True, from_
         pass
     else:        
         ts = pdr.DataReader(symbol, data_source, start=datetime.datetime(from_year, 1, 1))
-        ts.sort_index(inplace=True)
+        ts.sort_index(inplace=True) # stooq data need it
         ts.to_csv(timeseries_cache, encoding='utf-8')
 
     ts = pd.read_csv(timeseries_cache, index_col='Date', parse_dates=True)
