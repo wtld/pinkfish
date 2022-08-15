@@ -165,7 +165,8 @@ class Portfolio:
                          use_continuous_calendar=False,
                          force_stock_market_calendar=False,
                          check_fields=['close'],
-                         data_source='yahoo'):
+                         data_source='yahoo',
+                         dropna=True):
         """
         Fetch time series data for symbols.
 
@@ -235,8 +236,8 @@ class Portfolio:
                                             force_stock_market_calendar=force_stock_market_calendar,
                                             check_fields=check_fields)
                 self._add_symbol_columns(ts, symbol, _ts, fields)
-
-        ts.dropna(inplace=True)
+        if dropna:
+            ts.dropna(inplace=True)
         self.symbols = symbols
         return ts
 
